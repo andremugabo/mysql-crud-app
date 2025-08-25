@@ -3,6 +3,7 @@ const { Pool } = require("pg");
 
 // Async function to connect to PostgreSQL database
 const ConnectDB = async () => {
+  const useSSL = process.env.DB_SSL === "true";
   // Create a pool for connections
   const pool = new Pool({
     host: process.env.DB_HOST,
@@ -11,9 +12,7 @@ const ConnectDB = async () => {
     database: process.env.DB_DATABASE,
     port: parseInt(process.env.DB_PORT) || 5432,
     max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10, 
-    ssl: {
-      rejectUnauthorized: false 
-    }
+    ssl: useSSL ? { rejectUnauthorized: false } : false,
   });
 
   try {

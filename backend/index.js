@@ -15,18 +15,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 (async () => {
-    const pool = await ConnectDB();
-
-    // attach pool to each request
-    app.use((req, res, next) => {
+    try {
+      const pool = await ConnectDB();
+  
+      app.use((req, res, next) => {
         req.pool = pool;
         next();
-    });
-
-    // use the routes
-    app.use("/", router);
-
-    app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
-    });
+      });
+  
+      app.use("/", router);
+  
+      app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+      });
+    } catch (err) {
+      console.error("❌ Failed to start server:", err);
+      process.exit(1); 
+    }
 })();
