@@ -2,7 +2,7 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, 'feature/**', 'dev/**' ]
     paths:
       - 'frontend/**'
       - 'backend/**'
@@ -11,10 +11,11 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -------- Check for required secrets --------
+      # 2. Verify Docker Hub secrets
       - name: Verify Docker Hub secrets
         run: |
           if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
@@ -22,34 +23,45 @@ jobs:
             exit 1
           fi
 
+      # 3. Login to Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # 4. Setup Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # 5. Build and push backend image
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/backend:latest
-            ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+            andremugabo/backend:latest
+            andremugabo/backend:${{ github.sha }}
+            andremugabo/backend:${{ github.ref_name }}
+          cache-from: type=registry,ref=andremugabo/backend:latest
+          cache-to: type=registry,ref=andremugabo/backend:latest,mode=max
 
+      # 6. Build and push frontend image
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/frontend:latest
-            ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+            andremugabo/frontend:latest
+            andremugabo/frontend:${{ github.sha }}
+            andremugabo/frontend:${{ github.ref_name }}
+          cache-from: type=registry,ref=andremugabo/frontend:latest
+          cache-to: type=registry,ref=andremugabo/frontend:latest,mode=max
 
+      # 7. Cleanup unused Docker layers
       - name: Cleanup unused Docker layers
         run: docker system prune -f
