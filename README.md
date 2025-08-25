@@ -156,7 +156,10 @@ kubectl apply -f k8s/
 * Dockerization strategy
 * CI/CD workflow
 * Local and cloud deployment steps
-* Screenshots or logs demonstrating working services
+* logs demonstrating working services
+
+![Final Deployment Report](./assets/doc/devops-final.pdf)
+
 
 ---
 
