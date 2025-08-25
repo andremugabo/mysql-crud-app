@@ -10,7 +10,10 @@ const ConnectDB = async () => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: parseInt(process.env.DB_PORT) || 5432,
-    max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10, // max connections
+    max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10, 
+    ssl: {
+      rejectUnauthorized: false 
+    }
   });
 
   try {
