@@ -158,7 +158,7 @@ kubectl apply -f k8s/
 * Local and cloud deployment steps
 * logs demonstrating working services
 
-![Final Deployment Report](./assets/doc/devops-final.pdf)
+[Final Deployment Report](./assets/doc/devops-final.pdf)
 
 
 ---
