@@ -1,9 +1,11 @@
-// Import pg (node-postgres) for PostgreSQL
+// Import pg (node-postgres)
 const { Pool } = require("pg");
 
 // Async function to connect to PostgreSQL database
 const ConnectDB = async () => {
-  const useSSL = process.env.DB_SSL === "true";
+  // Use SSL if DB_SSL is true or if we are on Render
+  const useSSL = process.env.DB_SSL === "true" || process.env.RENDER_INTERNAL_HOSTNAME;
+
   // Create a pool for connections
   const pool = new Pool({
     host: process.env.DB_HOST,
@@ -11,14 +13,14 @@ const ConnectDB = async () => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: parseInt(process.env.DB_PORT) || 5432,
-    max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10, 
+    max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10,
     ssl: useSSL ? { rejectUnauthorized: false } : false,
   });
 
   try {
     // Test connection
     const res = await pool.query("SELECT NOW()");
-    console.log(`Connected to database ${process.env.DB_DATABASE} at ${res.rows[0].now}`);
+    console.log(`✅ Connected to database ${process.env.DB_DATABASE} at ${res.rows[0].now}`);
 
     // Create table if not exists
     const tableName = process.env.DB_TABLENAME || "users";
@@ -30,9 +32,9 @@ const ConnectDB = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    console.log(`${tableName} table created or already exists.`);
+    console.log(`✅ Table "${tableName}" created or already exists.`);
   } catch (err) {
-    console.error("Database setup error:", err);
+    console.error("❌ Database setup error:", err);
     throw err;
   }
 
