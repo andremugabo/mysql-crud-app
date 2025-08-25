@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-api
+  template:
+    metadata:
+      labels:
+        app: nodejs-api
+    spec:
+      containers:
+        - name: nodejs-api
+          image: aadiel1/backend:latest  # Replace with your registry
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: mariadb
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
+            - name: DB_DATABASE
+              value: crud_operations
+            - name: DB_WAITFORCONNECTIONS
+              value: "true"
+            - name: DB_CONNECTIONLIMIT
+              value: "10"
+            - name: DB_QUEUELIMIT
+              value: "0"
+            - name: DB_TABLENAME
+              value: "users"

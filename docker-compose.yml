@@ -1,0 +1,48 @@
+services:
+  mariadb:
+    image: mariadb:10.6
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: crud_operations
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "--protocol=tcp", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+  backend:
+    image: ${DOCKER_USERNAME}/backend:latest
+    environment:
+      - DB_HOST=mariadb
+      - DB_USER=root
+      - DB_PASSWORD=
+      - DB_DATABASE=crud_operations
+      - DB_WAITFORCONNECTIONS=true
+      - DB_CONNECTIONLIMIT=10
+      - DB_QUEUELIMIT=0
+      - DB_TABLENAME=users
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  frontend:
+    image: ${DOCKER_USERNAME}/frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mariadb-data:

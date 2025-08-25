@@ -1,0 +1,54 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Determine changed directories
+        id: changes
+        run: |
+          echo "CHANGED_DIRS=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | cut -d/ -f1 | sort -u)" >> $GITHUB_ENV
+
+      - name: Build and push backend image
+        if: contains(env.CHANGED_DIRS, 'backend')
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+
+      - name: Build and push frontend image
+        if: contains(env.CHANGED_DIRS, 'frontend')
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+
+      - name: Cleanup unused Docker layers
+        run: docker system prune -f
