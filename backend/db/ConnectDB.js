@@ -1,12 +1,11 @@
-// Import pg (node-postgres)
 const { Pool } = require("pg");
 
-// Async function to connect to PostgreSQL database
 const ConnectDB = async () => {
-  // Use SSL if DB_SSL is true or if we are on Render
-  const useSSL = process.env.DB_SSL === "true" || process.env.RENDER_INTERNAL_HOSTNAME;
+  // Use SSL if DB_SSL is true, or if we're on Render (detected by hostname)
+  const useSSL = process.env.DB_SSL === "true" || 
+                 process.env.DB_HOST?.includes('render.com') ||
+                 process.env.DB_HOST?.includes('render-postgres');
 
-  // Create a pool for connections
   const pool = new Pool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -18,11 +17,9 @@ const ConnectDB = async () => {
   });
 
   try {
-    // Test connection
     const res = await pool.query("SELECT NOW()");
     console.log(`✅ Connected to database ${process.env.DB_DATABASE} at ${res.rows[0].now}`);
 
-    // Create table if not exists
     const tableName = process.env.DB_TABLENAME || "users";
     await pool.query(`
       CREATE TABLE IF NOT EXISTS ${tableName} (
@@ -38,8 +35,7 @@ const ConnectDB = async () => {
     throw err;
   }
 
-  return pool; // return pool for queries
+  return pool;
 };
 
-// Export the function
 module.exports = ConnectDB;
