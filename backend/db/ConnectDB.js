@@ -1,39 +1,41 @@
-//importing the mysql2/promise for using async await in conenction function and in querys
-const mysql = require("mysql2/promise");
+// Import pg (node-postgres) for PostgreSQL
+const { Pool } = require("pg");
 
-//the async await function which connects to the database using the credentials in the .env files
+// Async function to connect to PostgreSQL database
 const ConnectDB = async () => {
-  const pool = await mysql.createPool({
+  // Create a pool for connections
+  const pool = new Pool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    waitForConnections: process.env.DB_WAITFORCONNECTIONS,
-    connectionLimit: process.env.DB_CONNECTIONLIMIT,
-    queueLimit: process.env.DB_QUEUELIMIT
+    port: parseInt(process.env.DB_PORT) || 5432,
+    max: parseInt(process.env.DB_CONNECTIONLIMIT) || 10, // max connections
   });
 
-  // async await query which creates the database if it doesn't exist
-  await pool.query(
-    `CREATE DATABASE IF NOT EXISTS \`${process.env.DB_DATABASE}\``
-  );
-  console.log(`Database ${process.env.DB_DATABASE} created or already exists.`);
+  try {
+    // Test connection
+    const res = await pool.query("SELECT NOW()");
+    console.log(`Connected to database ${process.env.DB_DATABASE} at ${res.rows[0].now}`);
 
-  // async await query which changes to the pool's database to the newly created database
-  await pool.query(`USE \`${process.env.DB_DATABASE}\``);
-  console.log(`Switched to database ${process.env.DB_DATABASE}`);
-
-  // async await query which creates the 'users' table if it doesn't exist and creates table for id, name, email
-  await pool.query(`CREATE TABLE IF NOT EXISTS \`${process.env.DB_TABLENAME}\` (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+    // Create table if not exists
+    const tableName = process.env.DB_TABLENAME || "users";
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS ${tableName} (
+        id SERIAL PRIMARY KEY,
         name VARCHAR(50) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )`);
-  console.log(`${process.env.DB_TABLENAME} table created or already exists.`);
-  // returning pool to further add querys in the database we did till now
-  return pool;
+      )
+    `);
+    console.log(`${tableName} table created or already exists.`);
+  } catch (err) {
+    console.error("Database setup error:", err);
+    throw err;
+  }
+
+  return pool; // return pool for queries
 };
 
-//exporting the function
+// Export the function
 module.exports = ConnectDB;

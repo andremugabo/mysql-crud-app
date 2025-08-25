@@ -1,13 +1,20 @@
+version: "3.8"
+
 services:
-  mariadb:
-    image: mariadb:10.6
+  postgres:
+    image: postgres:15
+    container_name: postgres
     environment:
-      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: crud_operations
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-123}        # match .env
+      POSTGRES_DB: ${DB_DATABASE:-crud_operations}
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql   # seed file
+    ports:
+      - "5433:5432"
     healthcheck:
-      test: ["CMD", "mariadb-admin", "--protocol=tcp", "ping"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -15,26 +22,27 @@ services:
       - app-network
 
   backend:
-    image: ${DOCKER_USERNAME}/backend:latest
-    environment:
-      - DB_HOST=mariadb
-      - DB_USER=root
-      - DB_PASSWORD=
-      - DB_DATABASE=crud_operations
-      - DB_WAITFORCONNECTIONS=true
-      - DB_CONNECTIONLIMIT=10
-      - DB_QUEUELIMIT=0
-      - DB_TABLENAME=users
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
     depends_on:
-      mariadb:
+      postgres:
         condition: service_healthy
     networks:
       - app-network
 
   frontend:
-    image: ${DOCKER_USERNAME}/frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
       - backend
     networks:
@@ -45,4 +53,4 @@ networks:
     driver: bridge
 
 volumes:
-  mariadb-data:
+  postgres-data:

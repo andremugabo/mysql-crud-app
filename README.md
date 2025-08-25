@@ -1,14 +1,14 @@
-# Full-Stack CRUD Application Deployment
+# Full-Stack CRUD Application Deployment (PostgreSQL)
 
 ## Overview
 
-This repository contains a **MySQL/MariaDB CRUD application** with:
+This repository contains a **PostgreSQL CRUD application** with:
 
-* **Backend:** Node.js (Express) API
+* **Backend:** Node.js (Express) API using `pg` for PostgreSQL
 * **Frontend:** React (Vite) app served via NGINX
-* **Database:** MariaDB with initialization SQL
+* **Database:** PostgreSQL
 
-All components are **containerized** and can be deployed locally with Docker Compose or to the cloud with Docker Compose or Kubernetes using pre-built images.
+All components are **containerized** and can be deployed locally with Docker Compose or to the cloud using pre-built images.
 
 ---
 
@@ -18,9 +18,8 @@ All components are **containerized** and can be deployed locally with Docker Com
 devops/
 ├── backend/                  # Node.js API
 ├── frontend/                 # React app
-├── mariadb/                  # Database initialization SQL
-├── nginx/                    # NGINX configuration for frontend
 ├── k8s/                      # Kubernetes manifests
+├── nginx/                    # NGINX configuration for frontend
 ├── docker-compose.dev.yml    # Local development compose (with builds)
 ├── docker-compose.yml        # Production compose (images only)
 └── .github/
@@ -44,9 +43,9 @@ cp frontend/.env.example frontend/.env
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
-* **Backend** waits for MariaDB to be healthy.
+* **Backend** waits for PostgreSQL to be healthy.
 * **Frontend** waits for the backend to be ready.
-* MariaDB data persists in a Docker volume (`mariadb-data`).
+* PostgreSQL data persists in a Docker volume (`postgres-data`).
 
 ---
 
@@ -110,6 +109,8 @@ docker-compose pull
 docker-compose up -d
 ```
 
+> **Note:** Backend connects to PostgreSQL; ensure `.env` has `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`, `DB_TABLENAME`.
+
 ### Kubernetes
 
 1. Apply manifests in `k8s/`:
@@ -122,6 +123,7 @@ kubectl apply -f k8s/
 
    * **DB credentials** via Kubernetes Secrets
    * **Frontend API URL** via ConfigMap
+
 3. Expose frontend via LoadBalancer or NodePort.
 
 ---
@@ -139,16 +141,16 @@ kubectl apply -f k8s/
 
   * `DOCKER_USERNAME = andremugabo`
   * `DOCKER_PASSWORD = <your password>`
+
 * Workflows use commit SHA tagging for traceability.
+
 * Local `.env` files are **not committed** for security.
 
 ---
 
 ## Report
 
-**final deployment report**
-
-*content :*
+**Final Deployment Report Content:**
 
 * Architecture overview
 * Dockerization strategy
@@ -156,8 +158,10 @@ kubectl apply -f k8s/
 * Local and cloud deployment steps
 * Screenshots or logs demonstrating working services
 
+---
 
-# Screenshort
+### Screenshot / Diagram
 
-### Mermaid Diagram
 ![mermaid diagram](./assets/image/ChatGPT%20Image%20Aug%2025,%202025,%2002_28_45%20PM.png)
+
+
