@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs-api-deployment
+  name: backend-deployment
   labels:
-    app: nodejs-api
+    app: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nodejs-api
+      app: backend
   template:
     metadata:
       labels:
-        app: nodejs-api
+        app: backend
     spec:
       containers:
-        - name: nodejs-api
+        - name: backend
           image: andremugabo/backend:latest
           ports:
             - containerPort: 3000
@@ -23,7 +23,7 @@ spec:
             - name: PORT
               value: "3000"
             - name: DB_HOST
-              value: postgres         # Kubernetes Postgres service name
+              value: postgres
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
@@ -45,6 +45,20 @@ spec:
             - name: DB_QUEUELIMIT
               value: "0"
             - name: DB_TABLENAME
-              value: "users"
+              value: users
             - name: DB_SSL
               value: "false"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer

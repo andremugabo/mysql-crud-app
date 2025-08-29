@@ -130,8 +130,8 @@ kubectl apply -f k8s/
 
 ## Cloud URLs
 
-* **Docker Compose deployment:** `[Your URL, e.g., http://your-server-ip]`
-* **Kubernetes deployment:** `[Your LoadBalancer URL]`
+* **Docker Compose deployment:** `http://18.224.171.230/`
+* **Kubernetes deployment:** `http://18.224.171.230:30080`
 
 ---
 
@@ -139,7 +139,7 @@ kubectl apply -f k8s/
 
 * Keep **Docker Hub credentials** in GitHub Secrets:
 
-  * `DOCKER_USERNAME = andremugabo`
+  * `DOCKER_USERNAME = dockerusername`
   * `DOCKER_PASSWORD = <your password>`
 
 * Workflows use commit SHA tagging for traceability.

@@ -2,11 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: react-service
+  labels:
+    app: react
 spec:
   selector:
     app: react
+  type: NodePort            # Expose service externally
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: LoadBalancer  # Or NodePort for minikube
+      port: 80              # Service port inside the cluster
+      targetPort: 80        # Container port
+      nodePort: 30080       # Port exposed on the EC2 host

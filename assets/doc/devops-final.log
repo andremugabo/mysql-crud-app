@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.23)  25 AUG 2025 20:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.23)  29 AUG 2025 03:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -792,10 +792,10 @@ Package hyperref Info: Link coloring OFF on input line 74.
 \@outlinefile=\write4
 \openout4 = `devops-final.out'.
 
-<aucalogo.png, id=103, 225.84375pt x 225.84375pt>
+<aucalogo.png, id=99, 225.84375pt x 225.84375pt>
 File: aucalogo.png Graphic file (type png)
 <use aucalogo.png>
-Package pdftex.def Info: aucalogo.png  used on input line 84.
+Package pdftex.def Info: aucalogo.png  used on input line 85.
 (pdftex.def)             Requested size: 113.81102pt x 113.81412pt.
  [1
 
@@ -814,7 +814,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.113 \newpage
+l.111 \newpage
                [1] (./devops-final.toc)
 \tf@toc=\write5
 \openout5 = `devops-final.toc'.
@@ -829,11 +829,6 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
 [2]
-LaTeX Font Info:    Trying to load font information for U+fontawesomefree0 on i
-nput line 174.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomefree0.fd
-)
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -842,13 +837,28 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
-[3{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+[3]
+LaTeX Font Info:    Trying to load font information for U+fontawesomefree0 on i
+nput line 183.
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomefree0.fd
+)
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 203.
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+[4{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free0.enc}
 ]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 188.
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-223.
+239.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -860,28 +870,28 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 258--258
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 269--269
 []|\OT1/cmr/m/n/12 Commit-specific de-ploy-
  []
 
 
-Overfull \hbox (3.34477pt too wide) in paragraph at lines 259--259
+Overfull \hbox (3.34477pt too wide) in paragraph at lines 270--270
 []|\OT1/cmtt/m/n/12 :\TS1/cmtt/m/n/10 $\OT1/cmtt/m/n/10 github.ref[]name| 
  []
 
 
-Overfull \hbox (10.78082pt too wide) in paragraph at lines 259--260
+Overfull \hbox (10.78082pt too wide) in paragraph at lines 270--271
 []|\OT1/cmtt/m/n/12 internshipfrontend:dev-new-feature|  
  []
 
 
-Overfull \hbox (9.14719pt too wide) in paragraph at lines 252--262
+Overfull \hbox (9.14719pt too wide) in paragraph at lines 263--273
  [][] 
  []
 
 LaTeX Font Info:    Trying to load font information for U+fontawesomefree2 on i
-nput line 267.
+nput line 278.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomefree2.fd
 )
@@ -893,38 +903,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
-[5]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
 [6{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free2.enc
 }]
-LaTeX Font Info:    Trying to load font information for U+fontawesomefree3 on i
-nput line 315.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomefree3.fd
-)
-LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on i
-nput line 316.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
-)
-LaTeX Font Info:    Trying to load font information for U+fontawesomebrands0 on
- input line 317.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/fontawesome5/ufontawesomebrands0.
-fd)
-LaTeX Font Info:    Font shape `U/fontawesomebrands0/solid/n' in size <12> not 
-available
-(Font)              Font shape `U/fontawesomebrands0/regular/n' tried instead o
-n input line 317.
-
-Overfull \hbox (8.48387pt too wide) in paragraph at lines 325--338
+Overfull \hbox (8.48387pt too wide) in paragraph at lines 319--332
  [][] 
  []
 
@@ -936,10 +917,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
-[7{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free3.enc
-}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome5/fa5brands0.enc
-}]
+[7]
 Underfull \hbox (badness 10000) in paragraph at lines 396--396
 []|\OT1/cmr/m/n/12 API blocked by
  []
@@ -966,44 +944,59 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
-[9] 
+[9]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+[10] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./devops-final.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `devops-final.out' has not changed.
-(rerunfilecheck)             Checksum: 0AF652CEB043E5F0C4FBC25E84E2F725;4163.
+
+
+Package rerunfilecheck Warning: File `devops-final.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `devops-final.out':
+(rerunfilecheck)             Before: F1ADBAE65989E312D2E7C509952E1A47;3911
+(rerunfilecheck)             After:  45F520E057D37E853F97E06B6A3ADDBA;3987.
  ) 
 Here is how much of TeX's memory you used:
- 25977 strings out of 474116
- 485934 string characters out of 5743682
- 2107187 words of memory out of 5000000
- 47756 multiletter control sequences out of 15000+600000
- 568834 words of font info for 74 fonts, out of 8000000 for 9000
+ 25920 strings out of 474116
+ 484260 string characters out of 5743682
+ 2102187 words of memory out of 5000000
+ 47721 multiletter control sequences out of 15000+600000
+ 567923 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,13n,97p,446b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,12n,97p,446b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/fontawesome5/FontAweso
-me5Brands-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/fo
-ntawesome5/FontAwesome5Free-Solid.pfb></usr/local/texlive/2024/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/publ
-ic/cm-super/sfrm1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public
-/cm-super/sftt1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/c
-m-super/sftt1095.pfb>
-Output written on devops-final.pdf (10 pages, 249608 bytes).
+me5Free-Solid.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmitt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+sbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
+12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200
+.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.p
+fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb
+>
+Output written on devops-final.pdf (11 pages, 232480 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 400 compressed objects within 4 object streams
- 170 named destinations out of 1000 (max. 500000)
- 210 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 429 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 202 words of extra memory for PDF output out of 10000 (max. 10000000)
 

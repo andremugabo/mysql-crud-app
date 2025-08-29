@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: react
-          image: andremugabo/frontend:latest  # Replace with your registry
+          image: andremugabo/frontend:latest  # Your frontend image
           ports:
             - containerPort: 80
           envFrom:
             - configMapRef:
-                name: react-app-config
+                name: react-app-config  # Uses the updated VITE_API_URL

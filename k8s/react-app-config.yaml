@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: react-app-config
 data:
-  VITE_API_URL: "/api"
+  VITE_API_URL: "http://nodejs-api:3000"
